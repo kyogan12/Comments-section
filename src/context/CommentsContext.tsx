@@ -71,10 +71,10 @@ export const CommentsContextProvider = ({
     setComms({ ...comms, comments: filtered });
   };
 
-  const handleAdd = (id: number, newCom: Reply) => {
+  const handleAdd = (id: number, newComment: Reply) => {
     const add = comms.comments.map((com) => {
       if (com.id === id) {
-        com.replies.push(newCom);
+        com.replies.push(newComment);
         return com;
       } else {
         return com;
