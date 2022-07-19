@@ -3,6 +3,7 @@ import { Upvotes } from "./Upvotes";
 import { User } from "./User";
 import { Content } from "./Content";
 import { ReplyText } from "./ReplyText";
+import { Reply } from "./Reply";
 
 export const MainComment = ({ comms }: any) => {
   return (
@@ -10,7 +11,7 @@ export const MainComment = ({ comms }: any) => {
       {comms.comments.map((comment: any) => (
         <Fragment key={comment.id}>
           <div className="comment-card-main">
-            <Upvotes comment={comment.score} />
+            <Upvotes comment={comment.score} id={comment.id} />
             <div className="wrapper">
               <User
                 createdAt={comment.createdAt}
@@ -21,6 +22,8 @@ export const MainComment = ({ comms }: any) => {
             </div>
           </div>
           <ReplyText
+            width={100}
+            username={comment.user.username}
             id={comment.id}
             replyingTo={comment.user.username}
             rId={comment.id}
@@ -31,7 +34,7 @@ export const MainComment = ({ comms }: any) => {
               {comment.replies.map((reply: any) => (
                 <Fragment key={reply.id}>
                   <div className="comment-card-reply" key={reply.id}>
-                    <Upvotes comment={reply.score} />
+                    <Upvotes id={reply.id} comment={reply.score} />
                     <div className="wrapper">
                       <User
                         image={reply.user.image.webp}
@@ -45,7 +48,9 @@ export const MainComment = ({ comms }: any) => {
                     </div>
                   </div>
                   <ReplyText
-                    replyingTo={reply.user.username}
+                    width={90}
+                    username={reply.user.username}
+                    replyingTo={reply.replyingTo}
                     id={comment.id}
                     rId={reply.id}
                     img={comms.currentUser.image.webp}
@@ -56,6 +61,13 @@ export const MainComment = ({ comms }: any) => {
           )}
         </Fragment>
       ))}
+      <Reply
+        width={100}
+        id={0}
+        replyingTo={""}
+        img={comms.currentUser.image.webp}
+        key={""}
+      />
     </div>
   );
 };

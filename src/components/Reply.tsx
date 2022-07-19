@@ -5,19 +5,21 @@ interface ReplyProps {
   img: string;
   id: number;
   replyingTo: string;
-  setReply: React.Dispatch<React.SetStateAction<boolean>>;
+  setReply?: React.Dispatch<React.SetStateAction<boolean>>;
+  width: number;
 }
 
-export const Reply = ({ img, id, replyingTo, setReply }: ReplyProps) => {
+export const Reply = ({ img, id, replyingTo, setReply, width }: ReplyProps) => {
   const [value, setValue] = useState<string>("");
   const { handleAdd, comms } = useComments();
 
+  //new comment object
   const newComment = {
     content: value,
     id: value,
     createdAt: "Just now",
     score: 0,
-    replyingTo: replyingTo,
+    replyingTo: replyingTo ? replyingTo : "",
     user: {
       image: {
         webp: comms.currentUser.image.webp,
@@ -28,13 +30,18 @@ export const Reply = ({ img, id, replyingTo, setReply }: ReplyProps) => {
   };
 
   return (
-    <div className="reply-box">
+    <div style={{ width: `${width}%` }} className="reply-box">
       <img src={require(`${img}`)} alt="avt" />
-      <textarea onChange={(e) => setValue(e.target.value)}></textarea>
+      <textarea
+        value={value}
+        placeholder="Add a comment..."
+        onChange={(e) => setValue(e.target.value)}
+      ></textarea>
       <button
         onClick={() => {
           handleAdd(id, newComment);
-          setReply(false);
+          setValue("");
+          setReply && setReply!(false);
         }}
       >
         REPLY

@@ -18,6 +18,10 @@ body,
     align-items: flex-end;
     flex-direction: column;
     width: 50%;
+    .black-line {
+      width: 0.1em;
+      background-color: black;
+    }
     .comment-card-main,
     .comment-card-reply {
       display: flex;
@@ -30,7 +34,6 @@ body,
       padding-top: 1%;
       padding-bottom: 1%;
       margin-bottom: 1%;
-      overflow: none;
       min-width: 550px;
       .score {
         display: flex;
@@ -47,6 +50,9 @@ body,
         }
       }
     }
+    .comment-card-main {
+      min-width: 100%;
+    }
     .upvotes {
       display: flex;
       flex-direction: column;
@@ -60,6 +66,11 @@ body,
       border-radius: 0.6em;
       background-color: hsl(223, 19%, 93%);
       align-items: center;
+      img {
+        &:hover {
+          cursor: pointer;
+        }
+      }
       p {
         width: 0.5em;
         align-items: center;
@@ -68,7 +79,6 @@ body,
     }
     .reply-box {
       display: flex;
-      width: 100%;
       background-color: white;
       margin-bottom: 2%;
       border-radius: 1em;
@@ -78,7 +88,8 @@ body,
       textarea {
         width: 80%;
         border-radius: 0.6em;
-        height: 5.5em;
+        padding: 0.5em;
+        height: 7em;
         border: 0.1rem grey solid;
         justify-content: start;
         resize: none;
@@ -87,16 +98,83 @@ body,
         }
       }
       img {
-        height: 50%;
+        height: 45%;
       }
       button {
         width: 10%;
-        height: 55%;
+        height: 40%;
         background-color: hsl(238, 40%, 52%);
         border: none;
         border-radius: 0.6em;
         color: white;
         font-weight: 500;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .delete-popup {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      width: 22.5em;
+      padding: 2em;
+      justify-content: space-between;
+      border-radius: 1em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      p {
+        color: hsl(211, 10%, 45%);
+        font-size: 14px;
+      }
+      h3 {
+        color: hsl(212, 24%, 26%);
+        font-weight: 500;
+        margin: 0;
+      }
+      button {
+        height: 2.6em;
+        width: 70%;
+        color: white;
+        font-weight: 500;
+        border: none;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 0.4em;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .btn-container {
+        display: flex;
+        gap: 1em;
+        justify-content: space-around;
+      }
+      .btn-no {
+        background-color: hsl(211, 10%, 45%);
+      }
+      .btn-yes {
+        background-color: hsl(358, 79%, 66%);
+      }
+    }
+    .selection-cont {
+      display: flex;
+      flex-direction: row;
+      .reply-edit {
+        margin: 0;
+        left: -1em;
+        justify-content: center;
+        top: -8em;
+      }
+      .reply-delete {
+        margin: 0;
+        position: relative;
+        top: -8em;
+        left: -2em;
+        font-weight: 500;
+        color: hsl(358, 79%, 66%);
         &:hover {
           cursor: pointer;
         }
@@ -116,22 +194,6 @@ body,
         align-self: center;
         margin-right: 0.2em;
       }
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .reply-edit {
-      margin: 0;
-      justify-content: center;
-      top: -9.2em;
-    }
-    .reply-delete {
-      margin: 0;
-      position: relative;
-      top: -8em;
-      left: -4em;
-      font-weight: 500;
-      color: hsl(358, 79%, 66%);
       &:hover {
         cursor: pointer;
       }

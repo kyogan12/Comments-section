@@ -6,7 +6,10 @@ type CommentsContextProviderProps = {
 };
 
 interface CommentsContext {
-  handleDelete: (id: number, rId: number) => void;
+  handleDeleteReplies: (id: number, rId: number) => void;
+  handleAdd: (id: number, newCom: any) => void;
+  handleDelete: (id: number) => void;
+  handleUpvotes: (id: number, action: string) => void;
   comms: {
     currentUser: {
       image: {
@@ -30,22 +33,6 @@ interface CommentsContext {
       replies: any;
     }[];
   };
-  handleAdd: (id: number, newCom: any) => void;
-}
-
-interface Reply {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
-  replyingTo: string;
-  user: {
-    image: {
-      png: string;
-      webp: string;
-    };
-    username: string;
-  };
 }
 
 export const CommentsContext = createContext({} as CommentsContext);
@@ -59,19 +46,10 @@ export const CommentsContextProvider = ({
 }: CommentsContextProviderProps) => {
   const [comms, setComms] = useState(data);
 
-  const handleDelete = (id: number, rId: number) => {
-    const filtered = comms.comments.map((com) => {
-      if (com.id === id) {
-        const filtered = com.replies.filter((reply) => reply.id !== rId);
-        return { ...com, replies: filtered };
-      } else {
-        return com;
-      }
-    });
-    setComms({ ...comms, comments: filtered });
-  };
-
-  const handleAdd = (id: number, newComment: Reply) => {
+  const handleAdd = (id: number, newComment: any) => {
+    if (newComment.replyingTo === "") {
+      comms.comments.push(newComment);
+    }
     const add = comms.comments.map((com) => {
       if (com.id === id) {
         com.replies.push(newComment);
@@ -83,8 +61,56 @@ export const CommentsContextProvider = ({
     setComms({ ...comms, comments: add });
   };
 
+  const handleDelete = (id: number) => {
+    const filtered = comms.comments.filter((comms) => comms.id !== id);
+    setComms({ ...comms, comments: filtered });
+  };
+
+  const handleDeleteReplies = (id: number, rId: number) => {
+    const filtered = comms.comments.map((com) => {
+      if (com.id === id) {
+        const filtered = com.replies.filter((reply) => reply.id !== rId);
+        return { ...com, replies: filtered };
+      } else {
+        return com;
+      }
+    });
+    setComms({ ...comms, comments: filtered });
+  };
+
+  const handleUpvotes = (id: number, action: string) => {
+    const upvoted = comms.comments.map((com) => {
+      if (com.id === id) {
+        return action === "+"
+          ? { ...com, score: com.score + 1 }
+          : { ...com, score: com.score - 1 };
+      } else {
+        //in case im not trying to upvote a comment im checking for replies
+        const upvotedReply = com.replies.map((reply) => {
+          if (reply.id === id) {
+            return action === "+"
+              ? { ...reply, score: reply.score + 1 }
+              : { ...reply, score: reply.score - 1 };
+          } else {
+            return reply;
+          }
+        });
+        return { ...com, replies: upvotedReply };
+      }
+    });
+    setComms({ ...comms, comments: upvoted });
+  };
+
   return (
-    <CommentsContext.Provider value={{ handleAdd, handleDelete, comms }}>
+    <CommentsContext.Provider
+      value={{
+        handleAdd,
+        handleDeleteReplies,
+        handleDelete,
+        handleUpvotes,
+        comms,
+      }}
+    >
       {children}
     </CommentsContext.Provider>
   );
