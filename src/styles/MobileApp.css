@@ -1,0 +1,77 @@
+@media screen and (max-width: 415px) {
+  #root,
+body {
+    min-width: 100px;
+  }
+  #root .main-container,
+body .main-container {
+    align-items: center;
+    padding: 0.6em;
+    width: 25em;
+  }
+  #root .main-container .wrapper,
+body .main-container .wrapper {
+    position: relative;
+    top: -1em;
+    height: 12em;
+  }
+  #root .main-container .comment-card-main,
+#root .main-container .comment-card-reply,
+body .main-container .comment-card-main,
+body .main-container .comment-card-reply {
+    padding-left: 2em;
+    padding-right: 2em;
+    min-width: 24em;
+    min-height: 16.6em;
+  }
+  #root .main-container .upvotes,
+body .main-container .upvotes {
+    height: 2em;
+    width: 5em;
+    flex-direction: row;
+    position: absolute;
+    transform: translate(0em, 6em);
+  }
+  #root .main-container .reply-text,
+body .main-container .reply-text {
+    position: relative;
+    transform: translate(9em, 5.3em);
+  }
+  #root .main-container .reply-box,
+body .main-container .reply-box {
+    min-width: 24em;
+    max-width: 24em;
+    height: 10em;
+    position: relative;
+    left: 0.5em;
+  }
+  #root .main-container .reply-box img,
+body .main-container .reply-box img {
+    height: 2em;
+    position: absolute;
+    transform: translate(0em, 7em);
+  }
+  #root .main-container .reply-box button,
+body .main-container .reply-box button {
+    position: absolute;
+    transform: translate(22em, 8.3em);
+    height: 2.5em;
+    width: 5em;
+  }
+  #root .main-container .reply-box textarea,
+body .main-container .reply-box textarea {
+    width: 100%;
+  }
+  #root .main-container .selection-cont,
+body .main-container .selection-cont {
+    transform: translate(8.5em, 5em);
+    height: 1.5em;
+    min-width: 10em;
+  }
+  #root .main-container .selection-cont p img,
+body .main-container .selection-cont p img {
+    height: 1em;
+  }
+}
+
+/*# sourceMappingURL=MobileApp.css.map */

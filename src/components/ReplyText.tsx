@@ -84,6 +84,8 @@ export const ReplyText = ({
       )}
       {reply && (
         <Reply
+          rId={rId}
+          setEdit={setEdit}
           edit={edit}
           width={width}
           id={id}

@@ -13,16 +13,13 @@ body,
   min-width: 100vh;
   background-color: hsl(228, 33%, 97%);
   margin: 0;
+  padding: 0.1em;
   .main-container {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
     align-self: center;
     width: 50%;
-    .black-line {
-      width: 0.1em;
-      background-color: black;
-    }
     .comment-card-main,
     .comment-card-reply {
       display: flex;
@@ -36,6 +33,13 @@ body,
       padding-bottom: 1%;
       margin-bottom: 1%;
       min-width: 550px;
+      .reply-black-bar {
+        position: absolute;
+        background-color: hsl(211, 10%, 45%);
+        width: 0.1em;
+        transform: translate(-3.5em);
+        height: 11em;
+      }
       .score {
         display: flex;
         color: hsl(238, 40%, 52%);
@@ -46,6 +50,12 @@ body,
         gap: 1em;
         flex-direction: row;
         align-items: center;
+        .you {
+          background-color: hsl(238, 40%, 52%);
+          padding-left: 0.3em;
+          padding-right: 0.3em;
+          color: white;
+        }
         img {
           height: 2.2em;
         }
@@ -98,7 +108,7 @@ body,
         }
       }
       img {
-        height: 3em;
+        height: 2.5em;
       }
       button {
         width: 10%;
@@ -216,31 +226,4 @@ p {
 .comment-card-reply {
   width: 90%;
   justify-content: flex-end;
-}
-
-@media only screen and (min-width: 400px) {
-  #root,
-  .body {
-    display: inline-block;
-    width: 100%;
-  }
-  .main-container {
-    padding: 2.5em;
-    align-items: center;
-    width: 100%;
-    .comment-card-main,
-    .comment-card-reply {
-      width: 2em;
-      min-width: 350px !important;
-    }
-    .upvotes {
-      position: relative;
-      bottom: -20px;
-    }
-    .reply-box {
-      img {
-        height: 2em !important;
-      }
-    }
-  }
 }

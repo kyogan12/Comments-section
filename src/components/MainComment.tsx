@@ -35,6 +35,7 @@ export const MainComment = ({ comms }: any) => {
               {comment.replies.map((reply: any) => (
                 <Fragment key={reply.id}>
                   <div className="comment-card-reply" key={reply.id}>
+                    <div className="reply-black-bar"></div>
                     <Upvotes id={reply.id} comment={reply.score} />
                     <div className="wrapper">
                       <User

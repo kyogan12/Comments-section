@@ -1,0 +1,65 @@
+@media screen and (max-width: 415px) {
+  #root,
+  body {
+    min-width: 100px;
+    .main-container {
+      align-items: center;
+      .wrapper {
+        position: relative;
+        top: -1em;
+        height: 12em;
+      }
+      padding: 0.6em;
+      width: 25em;
+      .comment-card-main,
+      .comment-card-reply {
+        padding-left: 2em;
+        padding-right: 2em;
+        min-width: 24em;
+        min-height: 16.6em;
+      }
+      .upvotes {
+        height: 2em;
+        width: 5em;
+        flex-direction: row;
+        position: absolute;
+        transform: translate(0em, 6em);
+      }
+      .reply-text {
+        position: relative;
+        transform: translate(9em, 5.3em);
+      }
+      .reply-box {
+        min-width: 24em;
+        max-width: 24em;
+        height: 10em;
+        position: relative;
+        left: 0.5em;
+        img {
+          height: 2em;
+          position: absolute;
+          transform: translate(0em, 7em);
+        }
+        button {
+          position: absolute;
+          transform: translate(22em, 8.3em);
+          height: 2.5em;
+          width: 5em;
+        }
+        textarea {
+          width: 100%;
+        }
+      }
+      .selection-cont {
+        transform: translate(8.5em, 5em);
+        height: 1.5em;
+        min-width: 10em;
+        p {
+          img {
+            height: 1em;
+          }
+        }
+      }
+    }
+  }
+}

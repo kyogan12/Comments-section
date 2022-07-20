@@ -9,6 +9,7 @@ export const User = ({ image, username, createdAt }: User) => {
     <div className="user">
       <img src={require(`${image}`)} alt="avt" />
       <h3>{username}</h3>
+      {username === "juliusomo" && <p className="you">you</p>}
       <p className="created-at">{createdAt}</p>
     </div>
   );

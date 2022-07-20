@@ -12,6 +12,7 @@ body,
   min-width: 100vh;
   background-color: hsl(228deg, 33%, 97%);
   margin: 0;
+  padding: 0.1em;
 }
 body .main-container,
 #root .main-container {
@@ -20,11 +21,6 @@ body .main-container,
   flex-direction: column;
   align-self: center;
   width: 50%;
-}
-body .main-container .black-line,
-#root .main-container .black-line {
-  width: 0.1em;
-  background-color: black;
 }
 body .main-container .comment-card-main,
 body .main-container .comment-card-reply,
@@ -42,6 +38,16 @@ body .main-container .comment-card-reply,
   margin-bottom: 1%;
   min-width: 550px;
 }
+body .main-container .comment-card-main .reply-black-bar,
+body .main-container .comment-card-reply .reply-black-bar,
+#root .main-container .comment-card-main .reply-black-bar,
+#root .main-container .comment-card-reply .reply-black-bar {
+  position: absolute;
+  background-color: hsl(211deg, 10%, 45%);
+  width: 0.1em;
+  transform: translate(-3.5em);
+  height: 11em;
+}
 body .main-container .comment-card-main .score,
 body .main-container .comment-card-reply .score,
 #root .main-container .comment-card-main .score,
@@ -58,6 +64,15 @@ body .main-container .comment-card-reply .user,
   gap: 1em;
   flex-direction: row;
   align-items: center;
+}
+body .main-container .comment-card-main .user .you,
+body .main-container .comment-card-reply .user .you,
+#root .main-container .comment-card-main .user .you,
+#root .main-container .comment-card-reply .user .you {
+  background-color: hsl(238deg, 40%, 52%);
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  color: white;
 }
 body .main-container .comment-card-main .user img,
 body .main-container .comment-card-reply .user img,
@@ -119,7 +134,7 @@ body .main-container .reply-box textarea:focus,
 }
 body .main-container .reply-box img,
 #root .main-container .reply-box img {
-  height: 3em;
+  height: 2.5em;
 }
 body .main-container .reply-box button,
 #root .main-container .reply-box button {
@@ -259,31 +274,6 @@ p {
 .comment-card-reply {
   width: 90%;
   justify-content: flex-end;
-}
-
-@media only screen and (min-width: 400px) {
-  #root,
-.body {
-    display: inline-block;
-    width: 100%;
-  }
-  .main-container {
-    padding: 2.5em;
-    align-items: center;
-    width: 100%;
-  }
-  .main-container .comment-card-main,
-.main-container .comment-card-reply {
-    width: 2em;
-    min-width: 350px !important;
-  }
-  .main-container .upvotes {
-    position: relative;
-    bottom: -20px;
-  }
-  .main-container .reply-box img {
-    height: 2em !important;
-  }
 }
 
 /*# sourceMappingURL=App.css.map */

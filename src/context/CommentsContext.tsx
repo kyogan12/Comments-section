@@ -10,7 +10,7 @@ interface CommentsContext {
   handleAdd: (id: number, newCom: any) => void;
   handleDelete: (id: number) => void;
   handleUpvotes: (id: number, action: string) => void;
-  handleEdit: (content: string) => void;
+  handleEdit: (id: number, rId: number, content: string) => void;
   comms: {
     currentUser: {
       image: {
@@ -88,6 +88,7 @@ export const CommentsContextProvider = ({
       } else {
         //in case im not trying to upvote a comment im checking for replies
         const upvotedReply = com.replies.map((reply) => {
+          console.log(reply);
           if (reply.id === id) {
             return action === "+"
               ? { ...reply, score: reply.score + 1 }
@@ -102,13 +103,15 @@ export const CommentsContextProvider = ({
     setComms({ ...comms, comments: upvoted });
   };
 
-  const handleEdit = (content: string) => {
+  const handleEdit = (id: number, rId: number, content: string) => {
     const editedComms = comms.comments.map((com) => {
-      if (com.user.username === "juliusomo") {
+      if (com.user.username === "juliusomo" && id === com.id) {
         return { ...com, content: content };
+      } else if (!rId) {
+        return com;
       } else {
         const replyEdit = com.replies.map((reply) => {
-          if (reply.user.username === "juliusomo") {
+          if (reply.user.username === "juliusomo" && rId === reply.id) {
             return { ...reply, content: content };
           } else {
             return reply;

@@ -1,4 +1,5 @@
 import "./styles/App.css";
+import "./styles/MobileApp.css";
 import { useComments } from "./context/CommentsContext";
 import { MainComment } from "./components/MainComment";
 
