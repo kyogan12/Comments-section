@@ -13,7 +13,7 @@ export const Upvotes = ({ comment, id }: Comment) => {
     <div className="upvotes">
       <img onClick={() => handleUpvotes(id, "+")} src={plus} alt="" />
       <p className="score">{comment}</p>
-      <img onClick={() => handleUpvotes(id, "-")} src={minus} alt="" />
+      <img onClick={() => handleUpvotes(id, "a")} src={minus} alt="" />
     </div>
   );
 };

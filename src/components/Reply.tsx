@@ -7,16 +7,29 @@ interface ReplyProps {
   replyingTo: string;
   setReply?: React.Dispatch<React.SetStateAction<boolean>>;
   width: number;
+  edit?: boolean;
+  rId?: number;
+  setEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Reply = ({ img, id, replyingTo, setReply, width }: ReplyProps) => {
+//this is way too many props but im in too deep now
+export const Reply = ({
+  img,
+  id,
+  replyingTo,
+  setReply,
+  width,
+  edit,
+  setEdit,
+  rId,
+}: ReplyProps) => {
   const [value, setValue] = useState<string>("");
-  const { handleAdd, comms } = useComments();
+  const { handleAdd, handleEdit, comms } = useComments();
 
   //new comment object
   const newComment = {
+    id: Math.floor(Math.random() * 1000),
     content: value,
-    id: value,
     createdAt: "Just now",
     score: 0,
     replyingTo: replyingTo ? replyingTo : "",
@@ -39,12 +52,13 @@ export const Reply = ({ img, id, replyingTo, setReply, width }: ReplyProps) => {
       ></textarea>
       <button
         onClick={() => {
-          handleAdd(id, newComment);
+          edit ? handleEdit(id, rId!, value) : handleAdd(id, newComment);
           setValue("");
           setReply && setReply!(false);
+          setEdit && setEdit(false);
         }}
       >
-        REPLY
+        {edit ? "Update" : "REPLY"}
       </button>
     </div>
   );

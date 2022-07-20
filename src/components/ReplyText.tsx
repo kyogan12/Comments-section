@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Reply } from "./Reply";
 import { useComments } from "../context/CommentsContext";
 import replyImg from "./images/icon-reply.svg";
+import del from "./images/icon-delete.svg";
+import ed from "./images/icon-edit.svg";
 
 interface ReplyTextProps {
   img: string;
@@ -10,6 +12,7 @@ interface ReplyTextProps {
   replyingTo: string;
   username: string;
   width: number;
+  content?: string;
 }
 
 export const ReplyText = ({
@@ -19,26 +22,33 @@ export const ReplyText = ({
   replyingTo,
   username,
   width,
+  content,
 }: ReplyTextProps) => {
   const [reply, setReply] = useState<boolean>(false);
   const [delPopUp, setDelPopUp] = useState<boolean>(false);
   const { handleDeleteReplies, handleDelete } = useComments();
+  const [edit, setEdit] = useState<boolean>(false);
 
   return (
     <>
       {username === "juliusomo" ? (
         <div className="selection-cont">
           <p className="reply-delete" onClick={() => setDelPopUp(true)}>
+            <img style={{ marginRight: "0.5em" }} src={del} alt="del" />
             Delete
           </p>
           <p
             onClick={() => {
-              replyingTo === "juliusomo"
-                ? handleDelete(id)
-                : handleDeleteReplies(id, rId);
+              setReply(true);
+              setEdit(true);
             }}
             className="reply-edit"
           >
+            <img
+              style={{ height: "75%", marginRight: "0.5em" }}
+              src={ed}
+              alt="ed"
+            />
             Edit
           </p>
         </div>
@@ -74,6 +84,9 @@ export const ReplyText = ({
       )}
       {reply && (
         <Reply
+          rId={rId}
+          setEdit={setEdit}
+          edit={edit}
           width={width}
           id={id}
           replyingTo={replyingTo}
