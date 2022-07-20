@@ -7,11 +7,20 @@ interface ReplyProps {
   replyingTo: string;
   setReply?: React.Dispatch<React.SetStateAction<boolean>>;
   width: number;
+  edit?: boolean;
+  rId?: number;
 }
 
-export const Reply = ({ img, id, replyingTo, setReply, width }: ReplyProps) => {
+export const Reply = ({
+  img,
+  id,
+  replyingTo,
+  setReply,
+  width,
+  edit,
+}: ReplyProps) => {
   const [value, setValue] = useState<string>("");
-  const { handleAdd, comms } = useComments();
+  const { handleAdd, handleEdit, comms } = useComments();
 
   //new comment object
   const newComment = {
@@ -33,18 +42,17 @@ export const Reply = ({ img, id, replyingTo, setReply, width }: ReplyProps) => {
     <div style={{ width: `${width}%` }} className="reply-box">
       <img src={require(`${img}`)} alt="avt" />
       <textarea
-        value={value}
         placeholder="Add a comment..."
         onChange={(e) => setValue(e.target.value)}
       ></textarea>
       <button
         onClick={() => {
-          handleAdd(id, newComment);
+          edit ? handleEdit(value) : handleAdd(id, newComment);
           setValue("");
           setReply && setReply!(false);
         }}
       >
-        REPLY
+        {edit ? "Update" : "REPLY"}
       </button>
     </div>
   );

@@ -17,6 +17,7 @@ body,
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    align-self: center;
     width: 50%;
     .black-line {
       width: 0.1em;
@@ -84,7 +85,6 @@ body,
       border-radius: 1em;
       justify-content: space-between;
       padding: 2.5%;
-      margin-top: -1.1em;
       textarea {
         width: 80%;
         border-radius: 0.6em;
@@ -98,11 +98,11 @@ body,
         }
       }
       img {
-        height: 45%;
+        height: 3em;
       }
       button {
         width: 10%;
-        height: 40%;
+        height: 3em;
         background-color: hsl(238, 40%, 52%);
         border: none;
         border-radius: 0.6em;
@@ -216,4 +216,31 @@ p {
 .comment-card-reply {
   width: 90%;
   justify-content: flex-end;
+}
+
+@media only screen and (min-width: 400px) {
+  #root,
+  .body {
+    display: inline-block;
+    width: 100%;
+  }
+  .main-container {
+    padding: 2.5em;
+    align-items: center;
+    width: 100%;
+    .comment-card-main,
+    .comment-card-reply {
+      width: 2em;
+      min-width: 350px !important;
+    }
+    .upvotes {
+      position: relative;
+      bottom: -20px;
+    }
+    .reply-box {
+      img {
+        height: 2em !important;
+      }
+    }
+  }
 }

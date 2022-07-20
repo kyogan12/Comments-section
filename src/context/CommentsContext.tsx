@@ -10,6 +10,7 @@ interface CommentsContext {
   handleAdd: (id: number, newCom: any) => void;
   handleDelete: (id: number) => void;
   handleUpvotes: (id: number, action: string) => void;
+  handleEdit: (content: string) => void;
   comms: {
     currentUser: {
       image: {
@@ -101,6 +102,24 @@ export const CommentsContextProvider = ({
     setComms({ ...comms, comments: upvoted });
   };
 
+  const handleEdit = (content: string) => {
+    const editedComms = comms.comments.map((com) => {
+      if (com.user.username === "juliusomo") {
+        return { ...com, content: content };
+      } else {
+        const replyEdit = com.replies.map((reply) => {
+          if (reply.user.username === "juliusomo") {
+            return { ...reply, content: content };
+          } else {
+            return reply;
+          }
+        });
+        return { ...com, replies: replyEdit };
+      }
+    });
+    setComms({ ...comms, comments: editedComms });
+  };
+
   return (
     <CommentsContext.Provider
       value={{
@@ -108,6 +127,7 @@ export const CommentsContextProvider = ({
         handleDeleteReplies,
         handleDelete,
         handleUpvotes,
+        handleEdit,
         comms,
       }}
     >
