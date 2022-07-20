@@ -85,7 +85,7 @@ export const CommentsContextProvider = ({
         return action === "+"
           ? { ...com, score: com.score + 1 }
           : { ...com, score: com.score - 1 };
-      } else {
+      } else if (com.replies) {
         //in case im not trying to upvote a comment im checking for replies
         const upvotedReply = com.replies.map((reply) => {
           console.log(reply);
@@ -98,6 +98,8 @@ export const CommentsContextProvider = ({
           }
         });
         return { ...com, replies: upvotedReply };
+      } else {
+        return com;
       }
     });
     setComms({ ...comms, comments: upvoted });
