@@ -66,7 +66,7 @@ export const MainComment = ({ comms }: any) => {
       ))}
       <Reply
         width={100}
-        id={0}
+        id={Math.floor(Math.random() * 2000)}
         replyingTo={""}
         img={comms.currentUser.image.webp}
         key={""}
